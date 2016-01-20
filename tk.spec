@@ -4,7 +4,7 @@
 #
 Name     : tk
 Version  : 8.6.4
-Release  : 4
+Release  : 5
 URL      : http://downloads.sourceforge.net/tcl/tk8.6.4-src.tar.gz
 Source0  : http://downloads.sourceforge.net/tcl/tk8.6.4-src.tar.gz
 Summary  : Tk graphical toolkit for the Tcl scripting language.
@@ -48,6 +48,7 @@ Summary: dev components for the tk package.
 Group: Development
 Requires: tk-bin
 Requires: tk-data
+Provides: tk-devel
 
 %description dev
 dev components for the tk package.
