@@ -77,6 +77,9 @@ rm -rf %{buildroot}
 pushd unix/
 %make_install
 popd
+## make_install_append content
+ln -s wish8.6 %{buildroot}/usr/bin/wish
+## make_install_append end
 
 %files
 %defattr(-,root,root,-)
@@ -254,6 +257,7 @@ popd
 
 %files bin
 %defattr(-,root,root,-)
+/usr/bin/wish
 /usr/bin/wish8.6
 
 %files data
