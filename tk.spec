@@ -4,7 +4,7 @@
 #
 Name     : tk
 Version  : 8.6.6
-Release  : 10
+Release  : 11
 URL      : http://downloads.sourceforge.net/tcl/tk8.6.6-src.tar.gz
 Source0  : http://downloads.sourceforge.net/tcl/tk8.6.6-src.tar.gz
 Summary  : Tk graphical toolkit for the Tcl scripting language.
@@ -62,11 +62,20 @@ Group: Documentation
 doc components for the tk package.
 
 
+%package extras
+Summary: extras components for the tk package.
+Group: Default
+
+%description extras
+extras components for the tk package.
+
+
 %prep
 %setup -q -n tk8.6.6
 
 %build
 export LANG=C
+export SOURCE_DATE_EPOCH=`date +%s -r configure`
 pushd unix/
 %configure --disable-static
 make V=1  %{?_smp_mflags}
@@ -365,11 +374,15 @@ ln -s wish8.6 %{buildroot}/usr/bin/wish
 
 %files dev
 %defattr(-,root,root,-)
+%exclude /usr/lib64/libtk8.6.so
 /usr/include/*.h
-/usr/lib64/*.so
-/usr/lib64/pkgconfig/*.pc
+/usr/lib64/pkgconfig/tk.pc
 
 %files doc
 %defattr(-,root,root,-)
 %doc /usr/share/man/man1/*
 %doc /usr/share/man/man3/*
+
+%files extras
+%defattr(-,root,root,-)
+/usr/lib64/libtk8.6.so
