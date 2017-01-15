@@ -4,7 +4,7 @@
 #
 Name     : tk
 Version  : 8.6.6
-Release  : 11
+Release  : 12
 URL      : http://downloads.sourceforge.net/tcl/tk8.6.6-src.tar.gz
 Source0  : http://downloads.sourceforge.net/tcl/tk8.6.6-src.tar.gz
 Summary  : Tk graphical toolkit for the Tcl scripting language.
@@ -16,6 +16,8 @@ Requires: tk-data
 BuildRequires : pkgconfig(x11)
 BuildRequires : pkgconfig(xext)
 BuildRequires : tcl
+BuildRequires : tcl-dev
+BuildRequires : zlib-dev
 
 %description
 The Tcl (Tool Command Language) provides a powerful platform for
@@ -75,13 +77,14 @@ extras components for the tk package.
 
 %build
 export LANG=C
-export SOURCE_DATE_EPOCH=`date +%s -r configure`
+export SOURCE_DATE_EPOCH=1484454471
 pushd unix/
 %configure --disable-static
 make V=1  %{?_smp_mflags}
 popd
 
 %install
+export SOURCE_DATE_EPOCH=1484454471
 rm -rf %{buildroot}
 pushd unix/
 %make_install
