@@ -4,7 +4,7 @@
 #
 Name     : tk
 Version  : 8.6.6
-Release  : 13
+Release  : 14
 URL      : http://downloads.sourceforge.net/tcl/tk8.6.6-src.tar.gz
 Source0  : http://downloads.sourceforge.net/tcl/tk8.6.6-src.tar.gz
 Summary  : Tk graphical toolkit for the Tcl scripting language.
