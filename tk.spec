@@ -4,15 +4,15 @@
 #
 Name     : tk
 Version  : 8.6.8
-Release  : 18
-URL      : http://downloads.sourceforge.net/tcl/tk8.6.8-src.tar.gz
-Source0  : http://downloads.sourceforge.net/tcl/tk8.6.8-src.tar.gz
+Release  : 19
+URL      : https://sourceforge.net/projects/tcl/files/Tcl/8.6.8/tk8.6.8-src.tar.gz
+Source0  : https://sourceforge.net/projects/tcl/files/Tcl/8.6.8/tk8.6.8-src.tar.gz
 Summary  : Tk graphical toolkit for the Tcl scripting language.
 Group    : Development/Tools
 License  : TCL
-Requires: tk-bin
-Requires: tk-doc
-Requires: tk-data
+Requires: tk-bin = %{version}-%{release}
+Requires: tk-license = %{version}-%{release}
+Requires: tk-man = %{version}-%{release}
 BuildRequires : libXScrnSaver-dev
 BuildRequires : pkgconfig(x11)
 BuildRequires : pkgconfig(xext)
@@ -32,37 +32,21 @@ powerful command languages for applications.
 %package bin
 Summary: bin components for the tk package.
 Group: Binaries
-Requires: tk-data
+Requires: tk-license = %{version}-%{release}
+Requires: tk-man = %{version}-%{release}
 
 %description bin
 bin components for the tk package.
 
 
-%package data
-Summary: data components for the tk package.
-Group: Data
-
-%description data
-data components for the tk package.
-
-
 %package dev
 Summary: dev components for the tk package.
 Group: Development
-Requires: tk-bin
-Requires: tk-data
-Provides: tk-devel
+Requires: tk-bin = %{version}-%{release}
+Provides: tk-devel = %{version}-%{release}
 
 %description dev
 dev components for the tk package.
-
-
-%package doc
-Summary: doc components for the tk package.
-Group: Documentation
-
-%description doc
-doc components for the tk package.
 
 
 %package extras
@@ -73,6 +57,22 @@ Group: Default
 extras components for the tk package.
 
 
+%package license
+Summary: license components for the tk package.
+Group: Default
+
+%description license
+license components for the tk package.
+
+
+%package man
+Summary: man components for the tk package.
+Group: Default
+
+%description man
+man components for the tk package.
+
+
 %prep
 %setup -q -n tk8.6.8
 
@@ -81,7 +81,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1514055982
+export SOURCE_DATE_EPOCH=1539820530
 export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
 export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
 export FFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
@@ -92,14 +92,26 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1514055982
+export SOURCE_DATE_EPOCH=1539820530
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/tk
+cp compat/license.terms %{buildroot}/usr/share/package-licenses/tk/compat_license.terms
+cp doc/license.terms %{buildroot}/usr/share/package-licenses/tk/doc_license.terms
+cp library/demos/license.terms %{buildroot}/usr/share/package-licenses/tk/library_demos_license.terms
+cp library/license.terms %{buildroot}/usr/share/package-licenses/tk/library_license.terms
+cp license.terms %{buildroot}/usr/share/package-licenses/tk/license.terms
+cp macosx/license.terms %{buildroot}/usr/share/package-licenses/tk/macosx_license.terms
+cp tests/license.terms %{buildroot}/usr/share/package-licenses/tk/tests_license.terms
+cp unix/license.terms %{buildroot}/usr/share/package-licenses/tk/unix_license.terms
+cp win/license.terms %{buildroot}/usr/share/package-licenses/tk/win_license.terms
+cp xlib/X11/license.terms %{buildroot}/usr/share/package-licenses/tk/xlib_X11_license.terms
+cp xlib/license.terms %{buildroot}/usr/share/package-licenses/tk/xlib_license.terms
 pushd unix/
 %make_install
 popd
-## make_install_append content
+## install_append content
 ln -s wish8.6 %{buildroot}/usr/bin/wish
-## make_install_append end
+## install_append end
 
 %files
 %defattr(-,root,root,-)
@@ -281,8 +293,311 @@ ln -s wish8.6 %{buildroot}/usr/bin/wish
 /usr/bin/wish
 /usr/bin/wish8.6
 
-%files data
+%files dev
 %defattr(-,root,root,-)
+%exclude /usr/lib64/libtk8.6.so
+/usr/include/*.h
+/usr/lib64/pkgconfig/tk.pc
+/usr/share/man/man3/Tk_3DBorderColor.3
+/usr/share/man/man3/Tk_3DBorderGC.3
+/usr/share/man/man3/Tk_3DHorizontalBevel.3
+/usr/share/man/man3/Tk_3DVerticalBevel.3
+/usr/share/man/man3/Tk_AddOption.3
+/usr/share/man/man3/Tk_Alloc3DBorderFromObj.3
+/usr/share/man/man3/Tk_AllocBitmapFromObj.3
+/usr/share/man/man3/Tk_AllocColorFromObj.3
+/usr/share/man/man3/Tk_AllocCursorFromObj.3
+/usr/share/man/man3/Tk_AllocFontFromObj.3
+/usr/share/man/man3/Tk_AttachHWND.3
+/usr/share/man/man3/Tk_Attributes.3
+/usr/share/man/man3/Tk_BindEvent.3
+/usr/share/man/man3/Tk_CanvasDrawableCoords.3
+/usr/share/man/man3/Tk_CanvasEventuallyRedraw.3
+/usr/share/man/man3/Tk_CanvasGetCoord.3
+/usr/share/man/man3/Tk_CanvasPsBitmap.3
+/usr/share/man/man3/Tk_CanvasPsColor.3
+/usr/share/man/man3/Tk_CanvasPsFont.3
+/usr/share/man/man3/Tk_CanvasPsPath.3
+/usr/share/man/man3/Tk_CanvasPsStipple.3
+/usr/share/man/man3/Tk_CanvasPsY.3
+/usr/share/man/man3/Tk_CanvasSetStippleOrigin.3
+/usr/share/man/man3/Tk_CanvasTagsOption.3
+/usr/share/man/man3/Tk_CanvasTextInfo.3
+/usr/share/man/man3/Tk_CanvasTkwin.3
+/usr/share/man/man3/Tk_CanvasWindowCoords.3
+/usr/share/man/man3/Tk_ChangeWindowAttributes.3
+/usr/share/man/man3/Tk_Changes.3
+/usr/share/man/man3/Tk_CharBbox.3
+/usr/share/man/man3/Tk_Class.3
+/usr/share/man/man3/Tk_ClearSelection.3
+/usr/share/man/man3/Tk_ClipboardAppend.3
+/usr/share/man/man3/Tk_ClipboardClear.3
+/usr/share/man/man3/Tk_CollapseMotionEvents.3
+/usr/share/man/man3/Tk_Colormap.3
+/usr/share/man/man3/Tk_ComputeTextLayout.3
+/usr/share/man/man3/Tk_ConfigureInfo.3
+/usr/share/man/man3/Tk_ConfigureValue.3
+/usr/share/man/man3/Tk_ConfigureWidget.3
+/usr/share/man/man3/Tk_ConfigureWindow.3
+/usr/share/man/man3/Tk_CoordsToWindow.3
+/usr/share/man/man3/Tk_CreateBinding.3
+/usr/share/man/man3/Tk_CreateBindingTable.3
+/usr/share/man/man3/Tk_CreateClientMessageHandler.3
+/usr/share/man/man3/Tk_CreateErrorHandler.3
+/usr/share/man/man3/Tk_CreateEventHandler.3
+/usr/share/man/man3/Tk_CreateGenericHandler.3
+/usr/share/man/man3/Tk_CreateImageType.3
+/usr/share/man/man3/Tk_CreateItemType.3
+/usr/share/man/man3/Tk_CreateOptionTable.3
+/usr/share/man/man3/Tk_CreatePhotoImageFormat.3
+/usr/share/man/man3/Tk_CreateSelHandler.3
+/usr/share/man/man3/Tk_CreateWindow.3
+/usr/share/man/man3/Tk_CreateWindowFromPath.3
+/usr/share/man/man3/Tk_DefineBitmap.3
+/usr/share/man/man3/Tk_DefineCursor.3
+/usr/share/man/man3/Tk_DeleteAllBindings.3
+/usr/share/man/man3/Tk_DeleteBinding.3
+/usr/share/man/man3/Tk_DeleteBindingTable.3
+/usr/share/man/man3/Tk_DeleteClientMessageHandler.3
+/usr/share/man/man3/Tk_DeleteErrorHandler.3
+/usr/share/man/man3/Tk_DeleteEventHandler.3
+/usr/share/man/man3/Tk_DeleteGenericHandler.3
+/usr/share/man/man3/Tk_DeleteImage.3
+/usr/share/man/man3/Tk_DeleteOptionTable.3
+/usr/share/man/man3/Tk_DeleteSelHandler.3
+/usr/share/man/man3/Tk_Depth.3
+/usr/share/man/man3/Tk_DestroyWindow.3
+/usr/share/man/man3/Tk_Display.3
+/usr/share/man/man3/Tk_DisplayName.3
+/usr/share/man/man3/Tk_DistanceToTextLayout.3
+/usr/share/man/man3/Tk_Draw3DPolygon.3
+/usr/share/man/man3/Tk_Draw3DRectangle.3
+/usr/share/man/man3/Tk_DrawChars.3
+/usr/share/man/man3/Tk_DrawFocusHighlight.3
+/usr/share/man/man3/Tk_DrawTextLayout.3
+/usr/share/man/man3/Tk_Fill3DPolygon.3
+/usr/share/man/man3/Tk_Fill3DRectangle.3
+/usr/share/man/man3/Tk_FindPhoto.3
+/usr/share/man/man3/Tk_FontId.3
+/usr/share/man/man3/Tk_Free3DBorder.3
+/usr/share/man/man3/Tk_Free3DBorderFromObj.3
+/usr/share/man/man3/Tk_FreeBitmap.3
+/usr/share/man/man3/Tk_FreeBitmapFromObj.3
+/usr/share/man/man3/Tk_FreeColor.3
+/usr/share/man/man3/Tk_FreeColorFromObj.3
+/usr/share/man/man3/Tk_FreeColormap.3
+/usr/share/man/man3/Tk_FreeConfigOptions.3
+/usr/share/man/man3/Tk_FreeCursor.3
+/usr/share/man/man3/Tk_FreeCursorFromObj.3
+/usr/share/man/man3/Tk_FreeFont.3
+/usr/share/man/man3/Tk_FreeFontFromObj.3
+/usr/share/man/man3/Tk_FreeGC.3
+/usr/share/man/man3/Tk_FreeImage.3
+/usr/share/man/man3/Tk_FreeOptions.3
+/usr/share/man/man3/Tk_FreePixmap.3
+/usr/share/man/man3/Tk_FreeSavedOptions.3
+/usr/share/man/man3/Tk_FreeTextLayout.3
+/usr/share/man/man3/Tk_FreeXId.3
+/usr/share/man/man3/Tk_GeometryRequest.3
+/usr/share/man/man3/Tk_Get3DBorder.3
+/usr/share/man/man3/Tk_Get3DBorderFromObj.3
+/usr/share/man/man3/Tk_GetAllBindings.3
+/usr/share/man/man3/Tk_GetAnchor.3
+/usr/share/man/man3/Tk_GetAnchorFromObj.3
+/usr/share/man/man3/Tk_GetAtomName.3
+/usr/share/man/man3/Tk_GetBinding.3
+/usr/share/man/man3/Tk_GetBitmap.3
+/usr/share/man/man3/Tk_GetBitmapFromObj.3
+/usr/share/man/man3/Tk_GetCapStyle.3
+/usr/share/man/man3/Tk_GetColor.3
+/usr/share/man/man3/Tk_GetColorByValue.3
+/usr/share/man/man3/Tk_GetColorFromObj.3
+/usr/share/man/man3/Tk_GetColormap.3
+/usr/share/man/man3/Tk_GetCursor.3
+/usr/share/man/man3/Tk_GetCursorFromData.3
+/usr/share/man/man3/Tk_GetCursorFromObj.3
+/usr/share/man/man3/Tk_GetDash.3
+/usr/share/man/man3/Tk_GetFont.3
+/usr/share/man/man3/Tk_GetFontFromObj.3
+/usr/share/man/man3/Tk_GetFontMetrics.3
+/usr/share/man/man3/Tk_GetGC.3
+/usr/share/man/man3/Tk_GetHINSTANCE.3
+/usr/share/man/man3/Tk_GetHWND.3
+/usr/share/man/man3/Tk_GetImage.3
+/usr/share/man/man3/Tk_GetImageMasterData.3
+/usr/share/man/man3/Tk_GetItemTypes.3
+/usr/share/man/man3/Tk_GetJoinStyle.3
+/usr/share/man/man3/Tk_GetJustify.3
+/usr/share/man/man3/Tk_GetJustifyFromObj.3
+/usr/share/man/man3/Tk_GetMMFromObj.3
+/usr/share/man/man3/Tk_GetNumMainWindows.3
+/usr/share/man/man3/Tk_GetOption.3
+/usr/share/man/man3/Tk_GetOptionInfo.3
+/usr/share/man/man3/Tk_GetOptionValue.3
+/usr/share/man/man3/Tk_GetPixels.3
+/usr/share/man/man3/Tk_GetPixelsFromObj.3
+/usr/share/man/man3/Tk_GetPixmap.3
+/usr/share/man/man3/Tk_GetRelief.3
+/usr/share/man/man3/Tk_GetReliefFromObj.3
+/usr/share/man/man3/Tk_GetRootCoords.3
+/usr/share/man/man3/Tk_GetScreenMM.3
+/usr/share/man/man3/Tk_GetScrollInfo.3
+/usr/share/man/man3/Tk_GetScrollInfoObj.3
+/usr/share/man/man3/Tk_GetSelection.3
+/usr/share/man/man3/Tk_GetUid.3
+/usr/share/man/man3/Tk_GetUserInactiveTime.3
+/usr/share/man/man3/Tk_GetVRootGeometry.3
+/usr/share/man/man3/Tk_GetVisual.3
+/usr/share/man/man3/Tk_Grab.3
+/usr/share/man/man3/Tk_HWNDToWindow.3
+/usr/share/man/man3/Tk_HandleEvent.3
+/usr/share/man/man3/Tk_Height.3
+/usr/share/man/man3/Tk_IdToWindow.3
+/usr/share/man/man3/Tk_ImageChanged.3
+/usr/share/man/man3/Tk_Init.3
+/usr/share/man/man3/Tk_InitConsoleChannels.3
+/usr/share/man/man3/Tk_InitImageArgs.3
+/usr/share/man/man3/Tk_InitOptions.3
+/usr/share/man/man3/Tk_InitStubs.3
+/usr/share/man/man3/Tk_InternAtom.3
+/usr/share/man/man3/Tk_InternalBorderBottom.3
+/usr/share/man/man3/Tk_InternalBorderLeft.3
+/usr/share/man/man3/Tk_InternalBorderRight.3
+/usr/share/man/man3/Tk_InternalBorderTop.3
+/usr/share/man/man3/Tk_Interp.3
+/usr/share/man/man3/Tk_IntersectTextLayout.3
+/usr/share/man/man3/Tk_IsContainer.3
+/usr/share/man/man3/Tk_IsEmbedded.3
+/usr/share/man/man3/Tk_IsMapped.3
+/usr/share/man/man3/Tk_IsTopLevel.3
+/usr/share/man/man3/Tk_Main.3
+/usr/share/man/man3/Tk_MainLoop.3
+/usr/share/man/man3/Tk_MainWindow.3
+/usr/share/man/man3/Tk_MaintainGeometry.3
+/usr/share/man/man3/Tk_MakeWindowExist.3
+/usr/share/man/man3/Tk_ManageGeometry.3
+/usr/share/man/man3/Tk_MapWindow.3
+/usr/share/man/man3/Tk_MeasureChars.3
+/usr/share/man/man3/Tk_MinReqHeight.3
+/usr/share/man/man3/Tk_MinReqWidth.3
+/usr/share/man/man3/Tk_MoveResizeWindow.3
+/usr/share/man/man3/Tk_MoveToplevelWindow.3
+/usr/share/man/man3/Tk_MoveWindow.3
+/usr/share/man/man3/Tk_Name.3
+/usr/share/man/man3/Tk_NameOf3DBorder.3
+/usr/share/man/man3/Tk_NameOfAnchor.3
+/usr/share/man/man3/Tk_NameOfBitmap.3
+/usr/share/man/man3/Tk_NameOfCapStyle.3
+/usr/share/man/man3/Tk_NameOfColor.3
+/usr/share/man/man3/Tk_NameOfCursor.3
+/usr/share/man/man3/Tk_NameOfFont.3
+/usr/share/man/man3/Tk_NameOfImage.3
+/usr/share/man/man3/Tk_NameOfJoinStyle.3
+/usr/share/man/man3/Tk_NameOfJustify.3
+/usr/share/man/man3/Tk_NameOfRelief.3
+/usr/share/man/man3/Tk_NameToWindow.3
+/usr/share/man/man3/Tk_Offset.3
+/usr/share/man/man3/Tk_OwnSelection.3
+/usr/share/man/man3/Tk_Parent.3
+/usr/share/man/man3/Tk_ParseArgv.3
+/usr/share/man/man3/Tk_PathName.3
+/usr/share/man/man3/Tk_PhotoBlank.3
+/usr/share/man/man3/Tk_PhotoExpand.3
+/usr/share/man/man3/Tk_PhotoGetImage.3
+/usr/share/man/man3/Tk_PhotoGetSize.3
+/usr/share/man/man3/Tk_PhotoPutBlock.3
+/usr/share/man/man3/Tk_PhotoPutZoomedBlock.3
+/usr/share/man/man3/Tk_PhotoSetSize.3
+/usr/share/man/man3/Tk_PointToChar.3
+/usr/share/man/man3/Tk_PostscriptFontName.3
+/usr/share/man/man3/Tk_PreserveColormap.3
+/usr/share/man/man3/Tk_QueueWindowEvent.3
+/usr/share/man/man3/Tk_RedrawImage.3
+/usr/share/man/man3/Tk_ReqHeight.3
+/usr/share/man/man3/Tk_ReqWidth.3
+/usr/share/man/man3/Tk_ResetUserInactiveTime.3
+/usr/share/man/man3/Tk_ResizeWindow.3
+/usr/share/man/man3/Tk_RestackWindow.3
+/usr/share/man/man3/Tk_RestoreSavedOptions.3
+/usr/share/man/man3/Tk_RestrictEvents.3
+/usr/share/man/man3/Tk_SafeInit.3
+/usr/share/man/man3/Tk_Screen.3
+/usr/share/man/man3/Tk_ScreenNumber.3
+/usr/share/man/man3/Tk_SetAppName.3
+/usr/share/man/man3/Tk_SetBackgroundFromBorder.3
+/usr/share/man/man3/Tk_SetCaretPos.3
+/usr/share/man/man3/Tk_SetClass.3
+/usr/share/man/man3/Tk_SetClassProcs.3
+/usr/share/man/man3/Tk_SetGrid.3
+/usr/share/man/man3/Tk_SetInternalBorder.3
+/usr/share/man/man3/Tk_SetInternalBorderEx.3
+/usr/share/man/man3/Tk_SetMinimumRequestSize.3
+/usr/share/man/man3/Tk_SetOptions.3
+/usr/share/man/man3/Tk_SetWindowBackground.3
+/usr/share/man/man3/Tk_SetWindowBackgroundPixmap.3
+/usr/share/man/man3/Tk_SetWindowBorder.3
+/usr/share/man/man3/Tk_SetWindowBorderPixmap.3
+/usr/share/man/man3/Tk_SetWindowBorderWidth.3
+/usr/share/man/man3/Tk_SetWindowColormap.3
+/usr/share/man/man3/Tk_SetWindowVisual.3
+/usr/share/man/man3/Tk_SizeOfBitmap.3
+/usr/share/man/man3/Tk_SizeOfImage.3
+/usr/share/man/man3/Tk_StrictMotif.3
+/usr/share/man/man3/Tk_TextLayoutToPostscript.3
+/usr/share/man/man3/Tk_TextWidth.3
+/usr/share/man/man3/Tk_Uid.3
+/usr/share/man/man3/Tk_UndefineCursor.3
+/usr/share/man/man3/Tk_UnderlineChars.3
+/usr/share/man/man3/Tk_UnderlineTextLayout.3
+/usr/share/man/man3/Tk_Ungrab.3
+/usr/share/man/man3/Tk_UnmaintainGeometry.3
+/usr/share/man/man3/Tk_UnmapWindow.3
+/usr/share/man/man3/Tk_UnsetGrid.3
+/usr/share/man/man3/Tk_Visual.3
+/usr/share/man/man3/Tk_Width.3
+/usr/share/man/man3/Tk_WindowId.3
+/usr/share/man/man3/Tk_X.3
+/usr/share/man/man3/Tk_Y.3
+/usr/share/man/man3/Ttk_AddPadding.3
+/usr/share/man/man3/Ttk_BoxContains.3
+/usr/share/man/man3/Ttk_CreateTheme.3
+/usr/share/man/man3/Ttk_ExpandBox.3
+/usr/share/man/man3/Ttk_GetBorderFromObj.3
+/usr/share/man/man3/Ttk_GetCurrentTheme.3
+/usr/share/man/man3/Ttk_GetDefaultTheme.3
+/usr/share/man/man3/Ttk_GetPaddingFromObj.3
+/usr/share/man/man3/Ttk_GetStickyFromObj.3
+/usr/share/man/man3/Ttk_GetTheme.3
+/usr/share/man/man3/Ttk_MakeBox.3
+/usr/share/man/man3/Ttk_MakePadding.3
+/usr/share/man/man3/Ttk_PackBox.3
+/usr/share/man/man3/Ttk_PadBox.3
+/usr/share/man/man3/Ttk_PlaceBox.3
+/usr/share/man/man3/Ttk_RelievePadding.3
+/usr/share/man/man3/Ttk_StickBox.3
+/usr/share/man/man3/Ttk_UniformPadding.3
+
+%files extras
+%defattr(-,root,root,-)
+/usr/lib64/libtk8.6.so
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/tk/compat_license.terms
+/usr/share/package-licenses/tk/doc_license.terms
+/usr/share/package-licenses/tk/library_demos_license.terms
+/usr/share/package-licenses/tk/library_license.terms
+/usr/share/package-licenses/tk/license.terms
+/usr/share/package-licenses/tk/macosx_license.terms
+/usr/share/package-licenses/tk/tests_license.terms
+/usr/share/package-licenses/tk/unix_license.terms
+/usr/share/package-licenses/tk/win_license.terms
+/usr/share/package-licenses/tk/xlib_X11_license.terms
+/usr/share/package-licenses/tk/xlib_license.terms
+
+%files man
+%defattr(0644,root,root,0755)
+/usr/share/man/man1/wish.1
 /usr/share/man/mann/bell.n
 /usr/share/man/mann/bind.n
 /usr/share/man/mann/bindtags.n
@@ -383,18 +698,3 @@ ln -s wish8.6 %{buildroot}/usr/bin/wish
 /usr/share/man/mann/ttk_widget.n
 /usr/share/man/mann/winfo.n
 /usr/share/man/mann/wm.n
-
-%files dev
-%defattr(-,root,root,-)
-%exclude /usr/lib64/libtk8.6.so
-/usr/include/*.h
-/usr/lib64/pkgconfig/tk.pc
-
-%files doc
-%defattr(-,root,root,-)
-%doc /usr/share/man/man1/*
-%doc /usr/share/man/man3/*
-
-%files extras
-%defattr(-,root,root,-)
-/usr/lib64/libtk8.6.so
