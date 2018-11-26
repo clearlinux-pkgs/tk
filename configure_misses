@@ -5,6 +5,5 @@ Configure miss: if 64bit support is requested
 Configure miss: if 64bit Sparc VIS support is requested
 Configure miss: build with symbols
 Configure miss: main in -lXbsd
-Configure miss: whether to use xft
 Configure miss: XScreenSaverQueryInfo
 Configure miss: XScreenSaverQueryInfo in -lXext
