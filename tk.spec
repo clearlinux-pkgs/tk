@@ -4,10 +4,10 @@
 #
 %define keepstatic 1
 Name     : tk
-Version  : 8.6.8
-Release  : 21
-URL      : https://sourceforge.net/projects/tcl/files/Tcl/8.6.8/tk8.6.8-src.tar.gz
-Source0  : https://sourceforge.net/projects/tcl/files/Tcl/8.6.8/tk8.6.8-src.tar.gz
+Version  : 8.6.9
+Release  : 22
+URL      : https://sourceforge.net/projects/tcl/files/Tcl/8.6.9/tk8.6.9-src.tar.gz
+Source0  : https://sourceforge.net/projects/tcl/files/Tcl/8.6.9/tk8.6.9-src.tar.gz
 Summary  : Tk graphical toolkit for the Tcl scripting language.
 Group    : Development/Tools
 License  : TCL
@@ -76,14 +76,14 @@ man components for the tk package.
 
 
 %prep
-%setup -q -n tk8.6.8
+%setup -q -n tk8.6.9
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1543220485
+export SOURCE_DATE_EPOCH=1546304934
 export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
 export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
 export FFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
@@ -94,7 +94,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1543220485
+export SOURCE_DATE_EPOCH=1546304934
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/tk
 cp compat/license.terms %{buildroot}/usr/share/package-licenses/tk/compat_license.terms
