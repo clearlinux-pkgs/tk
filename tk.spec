@@ -5,7 +5,7 @@
 %define keepstatic 1
 Name     : tk
 Version  : 8.6.9
-Release  : 22
+Release  : 23
 URL      : https://sourceforge.net/projects/tcl/files/Tcl/8.6.9/tk8.6.9-src.tar.gz
 Source0  : https://sourceforge.net/projects/tcl/files/Tcl/8.6.9/tk8.6.9-src.tar.gz
 Summary  : Tk graphical toolkit for the Tcl scripting language.
