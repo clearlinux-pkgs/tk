@@ -5,7 +5,7 @@
 %define keepstatic 1
 Name     : tk
 Version  : 8.6.9
-Release  : 24
+Release  : 25
 URL      : https://sourceforge.net/projects/tcl/files/Tcl/8.6.9/tk8.6.9-src.tar.gz
 Source0  : https://sourceforge.net/projects/tcl/files/Tcl/8.6.9/tk8.6.9-src.tar.gz
 Summary  : Tk graphical toolkit for the Tcl scripting language.
@@ -35,7 +35,6 @@ powerful command languages for applications.
 Summary: bin components for the tk package.
 Group: Binaries
 Requires: tk-license = %{version}-%{release}
-Requires: tk-man = %{version}-%{release}
 
 %description bin
 bin components for the tk package.
@@ -46,6 +45,7 @@ Summary: dev components for the tk package.
 Group: Development
 Requires: tk-bin = %{version}-%{release}
 Provides: tk-devel = %{version}-%{release}
+Requires: tk = %{version}-%{release}
 
 %description dev
 dev components for the tk package.
@@ -75,6 +75,15 @@ Group: Default
 man components for the tk package.
 
 
+%package staticdev
+Summary: staticdev components for the tk package.
+Group: Default
+Requires: tk-dev = %{version}-%{release}
+
+%description staticdev
+staticdev components for the tk package.
+
+
 %prep
 %setup -q -n tk8.6.9
 
@@ -83,7 +92,8 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1546304934
+export SOURCE_DATE_EPOCH=1556589647
+export LDFLAGS="${LDFLAGS} -fno-lto"
 export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
 export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
 export FFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
@@ -94,7 +104,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1546304934
+export SOURCE_DATE_EPOCH=1556589647
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/tk
 cp compat/license.terms %{buildroot}/usr/share/package-licenses/tk/compat_license.terms
@@ -299,7 +309,6 @@ ln -s wish8.6 %{buildroot}/usr/bin/wish
 %defattr(-,root,root,-)
 %exclude /usr/lib64/libtk8.6.so
 /usr/include/*.h
-/usr/lib64/*.a
 /usr/lib64/pkgconfig/tk.pc
 /usr/share/man/man3/Tk_3DBorderColor.3
 /usr/share/man/man3/Tk_3DBorderGC.3
@@ -701,3 +710,7 @@ ln -s wish8.6 %{buildroot}/usr/bin/wish
 /usr/share/man/mann/ttk_widget.n
 /usr/share/man/mann/winfo.n
 /usr/share/man/mann/wm.n
+
+%files staticdev
+%defattr(-,root,root,-)
+/usr/lib64/libtkstub8.6.a
