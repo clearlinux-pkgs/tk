@@ -109,7 +109,7 @@ cp win/license.terms %{buildroot}/usr/share/package-licenses/tk/win_license.term
 cp xlib/X11/license.terms %{buildroot}/usr/share/package-licenses/tk/xlib_X11_license.terms
 cp xlib/license.terms %{buildroot}/usr/share/package-licenses/tk/xlib_license.terms
 pushd unix/
-%make_install
+%make_install install-private-headers
 popd
 ## install_append content
 ln -s wish8.6 %{buildroot}/usr/bin/wish
