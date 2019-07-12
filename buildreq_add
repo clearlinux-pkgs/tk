@@ -3,5 +3,5 @@
 tcl
 zlib-dev
 tcl-dev
+tcl-staticdev
 libXScrnSaver-dev
-

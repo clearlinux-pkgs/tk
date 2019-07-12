@@ -5,7 +5,7 @@
 %define keepstatic 1
 Name     : tk
 Version  : 8.6.9
-Release  : 25
+Release  : 26
 URL      : https://sourceforge.net/projects/tcl/files/Tcl/8.6.9/tk8.6.9-src.tar.gz
 Source0  : https://sourceforge.net/projects/tcl/files/Tcl/8.6.9/tk8.6.9-src.tar.gz
 Summary  : Tk graphical toolkit for the Tcl scripting language.
@@ -20,6 +20,7 @@ BuildRequires : pkgconfig(xext)
 BuildRequires : pkgconfig(xft)
 BuildRequires : tcl
 BuildRequires : tcl-dev
+BuildRequires : tcl-staticdev
 BuildRequires : zlib-dev
 
 %description
@@ -91,20 +92,20 @@ staticdev components for the tk package.
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1556589647
-export LDFLAGS="${LDFLAGS} -fno-lto"
-export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
-export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
-export FFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
-export CXXFLAGS="$CXXFLAGS -O3 -falign-functions=32 -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1562974379
+export GCC_IGNORE_WERROR=1
+export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
+export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
+export FFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
+export CXXFLAGS="$CXXFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
 pushd unix/
 %configure
 make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1556589647
+export SOURCE_DATE_EPOCH=1562974379
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/tk
 cp compat/license.terms %{buildroot}/usr/share/package-licenses/tk/compat_license.terms
