@@ -4,8 +4,6 @@ Configure miss: whether to add a package name suffix for the manpages
 Configure miss: if 64bit support is requested
 Configure miss: if 64bit Sparc VIS support is requested
 Configure miss: build with symbols
-Configure miss: X
-Configure miss: X11 header files... checking for X11 libraries... checking for XCreateWindow in -lXwindow
 Configure miss: main in -lXbsd
 Configure miss: XScreenSaverQueryInfo
 Configure miss: XScreenSaverQueryInfo in -lXext

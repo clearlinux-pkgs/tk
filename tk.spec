@@ -4,10 +4,10 @@
 #
 %define keepstatic 1
 Name     : tk
-Version  : 8.6.9
-Release  : 26
-URL      : https://sourceforge.net/projects/tcl/files/Tcl/8.6.9/tk8.6.9-src.tar.gz
-Source0  : https://sourceforge.net/projects/tcl/files/Tcl/8.6.9/tk8.6.9-src.tar.gz
+Version  : 8.6.10
+Release  : 27
+URL      : https://sourceforge.net/projects/tcl/files/Tcl/8.6.10/tk8.6.10-src.tar.gz
+Source0  : https://sourceforge.net/projects/tcl/files/Tcl/8.6.10/tk8.6.10-src.tar.gz
 Summary  : Tk graphical toolkit for the Tcl scripting language.
 Group    : Development/Tools
 License  : TCL
@@ -86,14 +86,15 @@ staticdev components for the tk package.
 
 
 %prep
-%setup -q -n tk8.6.9
+%setup -q -n tk8.6.10
+cd %{_builddir}/tk8.6.10
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1562974379
+export SOURCE_DATE_EPOCH=1575400696
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
 export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
@@ -105,20 +106,20 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1562974379
+export SOURCE_DATE_EPOCH=1575400696
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/tk
-cp compat/license.terms %{buildroot}/usr/share/package-licenses/tk/compat_license.terms
-cp doc/license.terms %{buildroot}/usr/share/package-licenses/tk/doc_license.terms
-cp library/demos/license.terms %{buildroot}/usr/share/package-licenses/tk/library_demos_license.terms
-cp library/license.terms %{buildroot}/usr/share/package-licenses/tk/library_license.terms
-cp license.terms %{buildroot}/usr/share/package-licenses/tk/license.terms
-cp macosx/license.terms %{buildroot}/usr/share/package-licenses/tk/macosx_license.terms
-cp tests/license.terms %{buildroot}/usr/share/package-licenses/tk/tests_license.terms
-cp unix/license.terms %{buildroot}/usr/share/package-licenses/tk/unix_license.terms
-cp win/license.terms %{buildroot}/usr/share/package-licenses/tk/win_license.terms
-cp xlib/X11/license.terms %{buildroot}/usr/share/package-licenses/tk/xlib_X11_license.terms
-cp xlib/license.terms %{buildroot}/usr/share/package-licenses/tk/xlib_license.terms
+cp %{_builddir}/tk8.6.10/compat/license.terms %{buildroot}/usr/share/package-licenses/tk/58769f631eb2c8ded0c274ab1d399085cc7aa845
+cp %{_builddir}/tk8.6.10/doc/license.terms %{buildroot}/usr/share/package-licenses/tk/58769f631eb2c8ded0c274ab1d399085cc7aa845
+cp %{_builddir}/tk8.6.10/library/demos/license.terms %{buildroot}/usr/share/package-licenses/tk/58769f631eb2c8ded0c274ab1d399085cc7aa845
+cp %{_builddir}/tk8.6.10/library/license.terms %{buildroot}/usr/share/package-licenses/tk/58769f631eb2c8ded0c274ab1d399085cc7aa845
+cp %{_builddir}/tk8.6.10/license.terms %{buildroot}/usr/share/package-licenses/tk/58769f631eb2c8ded0c274ab1d399085cc7aa845
+cp %{_builddir}/tk8.6.10/macosx/license.terms %{buildroot}/usr/share/package-licenses/tk/58769f631eb2c8ded0c274ab1d399085cc7aa845
+cp %{_builddir}/tk8.6.10/tests/license.terms %{buildroot}/usr/share/package-licenses/tk/58769f631eb2c8ded0c274ab1d399085cc7aa845
+cp %{_builddir}/tk8.6.10/unix/license.terms %{buildroot}/usr/share/package-licenses/tk/58769f631eb2c8ded0c274ab1d399085cc7aa845
+cp %{_builddir}/tk8.6.10/win/license.terms %{buildroot}/usr/share/package-licenses/tk/58769f631eb2c8ded0c274ab1d399085cc7aa845
+cp %{_builddir}/tk8.6.10/xlib/X11/license.terms %{buildroot}/usr/share/package-licenses/tk/58769f631eb2c8ded0c274ab1d399085cc7aa845
+cp %{_builddir}/tk8.6.10/xlib/license.terms %{buildroot}/usr/share/package-licenses/tk/58769f631eb2c8ded0c274ab1d399085cc7aa845
 pushd unix/
 %make_install install-private-headers
 popd
@@ -308,9 +309,22 @@ ln -s wish8.6 %{buildroot}/usr/bin/wish
 
 %files dev
 %defattr(-,root,root,-)
-%exclude /usr/lib64/libtk8.6.so
-/usr/include/*.h
+/usr/include/tk.h
+/usr/include/tkDecls.h
+/usr/include/tkInt.h
+/usr/include/tkIntDecls.h
+/usr/include/tkIntPlatDecls.h
+/usr/include/tkIntXlibDecls.h
+/usr/include/tkPlatDecls.h
+/usr/include/tkPort.h
+/usr/include/tkUnixInt.h
+/usr/include/tkUnixPort.h
+/usr/include/ttkDecls.h
+/usr/include/ttkTheme.h
 /usr/lib64/pkgconfig/tk.pc
+/usr/share/man/man3/FindPhoto.3
+/usr/share/man/man3/FontId.3
+/usr/share/man/man3/MeasureChar.3
 /usr/share/man/man3/Tk_3DBorderColor.3
 /usr/share/man/man3/Tk_3DBorderGC.3
 /usr/share/man/man3/Tk_3DHorizontalBevel.3
@@ -596,17 +610,7 @@ ln -s wish8.6 %{buildroot}/usr/bin/wish
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/tk/compat_license.terms
-/usr/share/package-licenses/tk/doc_license.terms
-/usr/share/package-licenses/tk/library_demos_license.terms
-/usr/share/package-licenses/tk/library_license.terms
-/usr/share/package-licenses/tk/license.terms
-/usr/share/package-licenses/tk/macosx_license.terms
-/usr/share/package-licenses/tk/tests_license.terms
-/usr/share/package-licenses/tk/unix_license.terms
-/usr/share/package-licenses/tk/win_license.terms
-/usr/share/package-licenses/tk/xlib_X11_license.terms
-/usr/share/package-licenses/tk/xlib_license.terms
+/usr/share/package-licenses/tk/58769f631eb2c8ded0c274ab1d399085cc7aa845
 
 %files man
 %defattr(0644,root,root,0755)
