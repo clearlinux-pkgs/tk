@@ -5,7 +5,7 @@
 %define keepstatic 1
 Name     : tk
 Version  : 8.6.10
-Release  : 27
+Release  : 28
 URL      : https://sourceforge.net/projects/tcl/files/Tcl/8.6.10/tk8.6.10-src.tar.gz
 Source0  : https://sourceforge.net/projects/tcl/files/Tcl/8.6.10/tk8.6.10-src.tar.gz
 Summary  : Tk graphical toolkit for the Tcl scripting language.
@@ -94,11 +94,11 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1575400696
+export SOURCE_DATE_EPOCH=1605246681
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
-export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
-export FFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
+export FCFLAGS="$FFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
+export FFLAGS="$FFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
 export CXXFLAGS="$CXXFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
 pushd unix/
 %configure
@@ -106,7 +106,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1575400696
+export SOURCE_DATE_EPOCH=1605246681
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/tk
 cp %{_builddir}/tk8.6.10/compat/license.terms %{buildroot}/usr/share/package-licenses/tk/58769f631eb2c8ded0c274ab1d399085cc7aa845
