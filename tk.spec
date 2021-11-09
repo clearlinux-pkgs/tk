@@ -4,10 +4,10 @@
 #
 %define keepstatic 1
 Name     : tk
-Version  : 8.6.11
-Release  : 30
-URL      : https://sourceforge.net/projects/tcl/files/Tcl/8.6.11/tk8.6.11-src.tar.gz
-Source0  : https://sourceforge.net/projects/tcl/files/Tcl/8.6.11/tk8.6.11-src.tar.gz
+Version  : 8.6.12
+Release  : 31
+URL      : https://sourceforge.net/projects/tcl/files/Tcl/8.6.12/tk8.6.12-src.tar.gz
+Source0  : https://sourceforge.net/projects/tcl/files/Tcl/8.6.12/tk8.6.12-src.tar.gz
 Summary  : Tk graphical toolkit for the Tcl scripting language.
 Group    : Development/Tools
 License  : TCL
@@ -86,40 +86,40 @@ staticdev components for the tk package.
 
 
 %prep
-%setup -q -n tk8.6.11
-cd %{_builddir}/tk8.6.11
+%setup -q -n tk8.6.12
+cd %{_builddir}/tk8.6.12
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1609698811
+export SOURCE_DATE_EPOCH=1636486305
 export GCC_IGNORE_WERROR=1
-export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
-export FCFLAGS="$FFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
-export FFLAGS="$FFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
-export CXXFLAGS="$CXXFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
+export CFLAGS="$CFLAGS -Ofast -falign-functions=32 -fno-lto -fno-semantic-interposition -mno-vzeroupper -mprefer-vector-width=256 "
+export FCFLAGS="$FFLAGS -Ofast -falign-functions=32 -fno-lto -fno-semantic-interposition -mno-vzeroupper -mprefer-vector-width=256 "
+export FFLAGS="$FFLAGS -Ofast -falign-functions=32 -fno-lto -fno-semantic-interposition -mno-vzeroupper -mprefer-vector-width=256 "
+export CXXFLAGS="$CXXFLAGS -Ofast -falign-functions=32 -fno-lto -fno-semantic-interposition -mno-vzeroupper -mprefer-vector-width=256 "
 pushd unix/
 %configure
 make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1609698811
+export SOURCE_DATE_EPOCH=1636486305
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/tk
-cp %{_builddir}/tk8.6.11/compat/license.terms %{buildroot}/usr/share/package-licenses/tk/58769f631eb2c8ded0c274ab1d399085cc7aa845
-cp %{_builddir}/tk8.6.11/doc/license.terms %{buildroot}/usr/share/package-licenses/tk/58769f631eb2c8ded0c274ab1d399085cc7aa845
-cp %{_builddir}/tk8.6.11/library/demos/license.terms %{buildroot}/usr/share/package-licenses/tk/58769f631eb2c8ded0c274ab1d399085cc7aa845
-cp %{_builddir}/tk8.6.11/library/license.terms %{buildroot}/usr/share/package-licenses/tk/58769f631eb2c8ded0c274ab1d399085cc7aa845
-cp %{_builddir}/tk8.6.11/license.terms %{buildroot}/usr/share/package-licenses/tk/58769f631eb2c8ded0c274ab1d399085cc7aa845
-cp %{_builddir}/tk8.6.11/macosx/license.terms %{buildroot}/usr/share/package-licenses/tk/58769f631eb2c8ded0c274ab1d399085cc7aa845
-cp %{_builddir}/tk8.6.11/tests/license.terms %{buildroot}/usr/share/package-licenses/tk/58769f631eb2c8ded0c274ab1d399085cc7aa845
-cp %{_builddir}/tk8.6.11/unix/license.terms %{buildroot}/usr/share/package-licenses/tk/58769f631eb2c8ded0c274ab1d399085cc7aa845
-cp %{_builddir}/tk8.6.11/win/license.terms %{buildroot}/usr/share/package-licenses/tk/58769f631eb2c8ded0c274ab1d399085cc7aa845
-cp %{_builddir}/tk8.6.11/xlib/X11/license.terms %{buildroot}/usr/share/package-licenses/tk/58769f631eb2c8ded0c274ab1d399085cc7aa845
-cp %{_builddir}/tk8.6.11/xlib/license.terms %{buildroot}/usr/share/package-licenses/tk/58769f631eb2c8ded0c274ab1d399085cc7aa845
+cp %{_builddir}/tk8.6.12/compat/license.terms %{buildroot}/usr/share/package-licenses/tk/58769f631eb2c8ded0c274ab1d399085cc7aa845
+cp %{_builddir}/tk8.6.12/doc/license.terms %{buildroot}/usr/share/package-licenses/tk/58769f631eb2c8ded0c274ab1d399085cc7aa845
+cp %{_builddir}/tk8.6.12/library/demos/license.terms %{buildroot}/usr/share/package-licenses/tk/58769f631eb2c8ded0c274ab1d399085cc7aa845
+cp %{_builddir}/tk8.6.12/library/license.terms %{buildroot}/usr/share/package-licenses/tk/58769f631eb2c8ded0c274ab1d399085cc7aa845
+cp %{_builddir}/tk8.6.12/license.terms %{buildroot}/usr/share/package-licenses/tk/58769f631eb2c8ded0c274ab1d399085cc7aa845
+cp %{_builddir}/tk8.6.12/macosx/license.terms %{buildroot}/usr/share/package-licenses/tk/58769f631eb2c8ded0c274ab1d399085cc7aa845
+cp %{_builddir}/tk8.6.12/tests/license.terms %{buildroot}/usr/share/package-licenses/tk/58769f631eb2c8ded0c274ab1d399085cc7aa845
+cp %{_builddir}/tk8.6.12/unix/license.terms %{buildroot}/usr/share/package-licenses/tk/58769f631eb2c8ded0c274ab1d399085cc7aa845
+cp %{_builddir}/tk8.6.12/win/license.terms %{buildroot}/usr/share/package-licenses/tk/58769f631eb2c8ded0c274ab1d399085cc7aa845
+cp %{_builddir}/tk8.6.12/xlib/X11/license.terms %{buildroot}/usr/share/package-licenses/tk/58769f631eb2c8ded0c274ab1d399085cc7aa845
+cp %{_builddir}/tk8.6.12/xlib/license.terms %{buildroot}/usr/share/package-licenses/tk/58769f631eb2c8ded0c274ab1d399085cc7aa845
 pushd unix/
 %make_install install-private-headers
 popd

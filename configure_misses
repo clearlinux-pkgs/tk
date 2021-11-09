@@ -1,9 +1,9 @@
-Configure miss: whether to use symlinks for manpages
-Configure miss: whether to compress the manpages
-Configure miss: whether to add a package name suffix for the manpages
-Configure miss: if 64bit support is requested
-Configure miss: if 64bit Sparc VIS support is requested
-Configure miss: build with symbols
-Configure miss: main in -lXbsd
 Configure miss: XScreenSaverQueryInfo
 Configure miss: XScreenSaverQueryInfo in -lXext
+Configure miss: build with symbols
+Configure miss: if 64bit Sparc VIS support is requested
+Configure miss: if 64bit support is requested
+Configure miss: main in -lXbsd
+Configure miss: whether to add a package name suffix for the manpages
+Configure miss: whether to compress the manpages
+Configure miss: whether to use symlinks for manpages
