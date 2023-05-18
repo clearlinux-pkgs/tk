@@ -1,0 +1,2 @@
+tcl-dev
+tk-staticdev = %{version}-%{release}
